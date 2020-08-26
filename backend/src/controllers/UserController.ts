@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { QueryBuilder, getConnection } from "typeorm";
+import { Request, Response } from "express";
+import { getConnection } from "typeorm";
 import User from "../entities/User";
 
 class UserController {
@@ -9,7 +9,10 @@ class UserController {
          .where("user.id = :id", { id: 1 })
          .getOne();
 
-      return console.log(user);
+      console.log(user);
+      if (!user) return response.json({ error: "user not found" }).status(204);
+
+      return response.status(200).json(user);
    };
 }
 
