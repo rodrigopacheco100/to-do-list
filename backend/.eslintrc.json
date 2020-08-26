@@ -1,9 +1,4 @@
 {
    "extends": "airbnb-typescript-prettier",
-   "rules": {
-      "linebreak-style": [
-         "error",
-         "windows"
-      ]
-   }
+   "rules": {}
 }
