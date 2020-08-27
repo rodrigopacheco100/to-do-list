@@ -16,7 +16,8 @@ class UserController {
          .getOne();
 
       console.log(user);
-      if (!user) return response.status(204).json({ error: "User not found!" });
+
+      if (!user) return response.status(204);
 
       return response.status(200).json(user);
    };
@@ -46,6 +47,8 @@ class UserController {
                .status(500)
                .json({ error: "User creation failed!" });
          });
+
+      console.log(user);
 
       if (!user)
          return response.status(400).json({ error: "Could not create user!" });

@@ -31,6 +31,39 @@ class TodoController {
 
       return response.status(201).json(todo);
    };
+
+   update = async (request: Request, response: Response) => {
+      const { id, content, isFinished } = request.body;
+
+      const todo = await getConnection()
+         .createQueryBuilder()
+         .update(Todo)
+         .set({ isFinished, content })
+         .where("todo.id = :id", { id })
+         .execute()
+         .catch(() => {
+            return response.status(500).json({ error: "Todo update failed!" });
+         });
+
+      return response.status(200).json(todo);
+   };
+
+   delete = async (request: Request, response: Response) => {
+      const { id } = request.body;
+
+      await getConnection()
+         .createQueryBuilder()
+         .delete()
+         .from(Todo)
+         .where("id = :id", { id })
+         .execute()
+         .then(() => {
+            return response.status(204).send();
+         })
+         .catch(() => {
+            return response.status(500).json({ error: "Todo delete failed!" });
+         });
+   };
 }
 
 export default new TodoController();
