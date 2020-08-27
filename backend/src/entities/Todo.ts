@@ -18,7 +18,7 @@ export default class Todo {
    @Column()
    isFinished!: boolean;
 
-   @OneToOne((type) => User)
+   @OneToOne((type) => User, (user) => user.id)
    @JoinColumn()
-   userId!: User;
+   user!: number;
 }

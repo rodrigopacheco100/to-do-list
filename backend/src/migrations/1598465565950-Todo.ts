@@ -24,6 +24,11 @@ export default class Todo1598465565950 implements MigrationInterface {
                   type: "varchar",
                },
                {
+                  name: "isFinished",
+                  type: "boolean",
+                  default: 0,
+               },
+               {
                   name: "userId",
                   type: "int",
                },
