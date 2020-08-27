@@ -3,10 +3,13 @@ import { getConnection } from "typeorm";
 import User from "../entities/User";
 
 class UserController {
-   findOne = async (request: Request, response: Response) => {
+   find = async (request: Request, response: Response) => {
+      const { username, password } = request.body;
+
       const user = await getConnection()
          .createQueryBuilder(User, "user")
-         .where("user.id = :id", { id: 1 })
+         .where("user.username = :username", { username })
+         .andWhere("user.password = :password", { password })
          .getOne();
 
       console.log(user);
